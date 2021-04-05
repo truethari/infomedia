@@ -1,6 +1,5 @@
 from .run       import Worker
 from .version   import __version__
-import sys
 import argparse
 
 def main():
@@ -31,7 +30,7 @@ def main():
         "--output-format",
         type=str,
         default="False",
-        choices=["json", "csv"],
+        choices=["json", "ini"],
         help="Data file format",
     )
 
@@ -45,12 +44,14 @@ def main():
 
     cli_args = parser.parse_args()
 
-    Worker(
+    worker = Worker(
         cli_args.input,
         cli_args.info,
         cli_args.output_format,
         cli_args.save_path
     )
+
+    worker.application()
 
 if __name__ == '__main__':
     main()
