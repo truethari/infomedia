@@ -28,7 +28,7 @@ setup(
     package_data = {'' : ['dependencies/*.zip']},
     entry_points={
         "console_scripts": [
-            "thumb-gen=thumb_gen.__main__:main",
+            "thumb-gen=infomedia.__main__:main",
         ]
     },
 )
