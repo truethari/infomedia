@@ -1,20 +1,25 @@
+import argparse
+
 from .run       import Worker
 from .version   import __version__
-import argparse
+
+class MyHelpFormatter(argparse.ArgumentDefaultsHelpFormatter):
+    def _get_help_string(self, action):
+        return action.help
 
 def main():
     parser = argparse.ArgumentParser(
-        formatter_class=argparse.ArgumentDefaultsHelpFormatter,
+        formatter_class=MyHelpFormatter,
         description="infomedia {}".format(__version__)
     )
-    parser.add_argument("input", help="File path")
+    parser.add_argument("file", help="path to file")
 
     parser.add_argument(
         "-i",
         "--info",
         type=str,
         default="False",
-        help="Get information about",
+        help="get information about",
     )
 
     parser.add_argument(
