@@ -9,6 +9,6 @@ def test_mediainfo():
     assert "duration" in test_mediainfo_value["format"]
 
 def test_Worker():
-    worker = Worker(video_path, request_data='False', output_format='json', save_path='/home/')
+    worker = Worker(video_path, request_data='False', output_format='json', save_path='/home/runner/work/infomedia/infomedia')
     worker._application()
     assert os.path.isfile(os.path.join(video_path[:-4] + ".json"))

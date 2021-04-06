@@ -62,12 +62,12 @@ class Worker():
 
         elif self.output_format != 'False' and self.save_path != 'False' and self.request_data == 'False':
             if self.output_format == 'json':
-                f = open(os.path.join(os.path.dirname(self.input_file), (ntpath.basename(self.input_file[:-4]) + ".json")), "w")
+                f = open(os.path.join(self.save_path, (ntpath.basename(self.input_file[:-4]) + ".json")), "w")
                 _ffprobe(self.input_file, pformat='json', pstdout=f)
                 f.close
 
             elif self.output_format == 'ini':
-                f = open(os.path.join(os.path.dirname(self.input_file), (ntpath.basename(self.input_file[:-4]) + ".ini")), "w")
+                f = open(os.path.join(self.save_path, (ntpath.basename(self.input_file[:-4]) + ".ini")), "w")
                 _ffprobe(self.input_file, pformat='ini', pstdout=f)
                 f.close
 
