@@ -1,4 +1,5 @@
-from .config import _which_ffprobe
+from .config    import _which_ffprobe
+from .utils     import _check_file_exists
 
 import os
 import re
@@ -46,7 +47,7 @@ class Worker():
         output_format,
         save_path,
     ):
-        self.input_file = input_file
+        self.input_file = _check_file_exists(input_file)
         self.request_data = request_data
         self.output_format = output_format
         self.save_path = save_path
@@ -80,7 +81,9 @@ class Worker():
 
 def mediainfo(file_path):
     f = open("tempdata.ini", "w")
-    _ffprobe(file_path, pformat='ini', pstdout=f)
-    f.close
+    try:
+        _ffprobe(_check_file_exists(file_path), pformat='ini', pstdout=f)
+    finally:
+        f.close()
 
     return _get_data()

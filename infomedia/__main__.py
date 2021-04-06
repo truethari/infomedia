@@ -50,7 +50,7 @@ def main():
     cli_args = parser.parse_args()
 
     worker = Worker(
-        cli_args.input,
+        cli_args.file,
         cli_args.info,
         cli_args.output_format,
         cli_args.save_path

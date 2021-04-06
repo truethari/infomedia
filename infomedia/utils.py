@@ -1,6 +1,5 @@
 import os
 import sys
-import pathlib
 import zipfile
 
 import infomedia as _
@@ -23,3 +22,16 @@ def _extract_zip(file_path):
 def _set_executable(a):
     if _check_os() != 'win32':
         os.chmod(a, 0o755)
+
+def _check_file_exists(file_path):
+    path = file_path
+    if os.path.isfile(path):
+        real_path = path
+    else:
+        path = os.path.join(os.getcwd(), file_path)
+        if os.path.isfile(path):
+            real_path = path
+        else:
+            raise FileNotFoundError("infomedia --> {}: No such a file!".format(file_path))
+
+    return real_path
