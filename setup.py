@@ -11,13 +11,14 @@ with open('README.rst') as readme_file:
 setup(
     name="infomedia",
     version=__version__,
-    description="A Python application that can be used to retrieve media information.",
+    description="This is a Python application that can be used to retrieve media file information such as duration, frame rate, bit rate, etc..",
     long_description=long_description,
     author="tharindu.dev",
     author_email="tharindu.nm@yahoo.com",
     url="https://github.com/truethari/infomedia",
     keywords="video ffmpeg ffprobe",
     project_urls={
+        "Source": 'https://github.com/truethari/infomedia/',
         "Bug Tracker": "https://github.com/truethari/infomedia/issues",
     },
     classifiers=[
