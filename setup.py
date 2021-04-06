@@ -16,7 +16,7 @@ setup(
     author="tharindu.dev",
     author_email="tharindu.nm@yahoo.com",
     url="https://github.com/truethari/infomedia",
-    keywords="thumbnails video screenshot",
+    keywords="video ffmpeg ffprobe",
     project_urls={
         "Bug Tracker": "https://github.com/truethari/infomedia/issues",
     },
@@ -28,7 +28,7 @@ setup(
     package_data = {'' : ['dependencies/*.zip']},
     entry_points={
         "console_scripts": [
-            "thumb-gen=infomedia.__main__:main",
+            "infomedia=infomedia.__main__:main",
         ]
     },
 )

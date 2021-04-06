@@ -51,7 +51,7 @@ def main():
         cli_args.save_path
     )
 
-    worker.application()
+    worker._application()
 
 if __name__ == '__main__':
     main()
