@@ -1,6 +1,6 @@
 import os
 
-from infomedia.run  import mediainfo, Worker
+from infomedia  import mediainfo, Worker
 
 video_path = "/home/sample-mp4-file.mp4"
 
