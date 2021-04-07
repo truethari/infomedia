@@ -3,6 +3,9 @@ name: infomedia
 on:
   push:
     branches: [ master ]
+    paths-ignore:
+      - '**/README.md'
+      - '**/README.rst'
   pull_request:
     branches: [ master ]
 
