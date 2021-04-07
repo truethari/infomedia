@@ -19,6 +19,7 @@ def _ffprobe(file_path, pformat='ini', pstdout=subprocess.PIPE, psubprocess='cal
 
 def _get_data(request_info='all'):
     dict = {}
+    errors = []
     tmp_dict = {}
     config_object = configparser.ConfigParser()
     config_object.read("tempdata.ini")
@@ -31,6 +32,19 @@ def _get_data(request_info='all'):
                     if option == item:
                         default = config_object[section]
                         dict[section + '.' + option] = default[item]
+
+        for info in request_info:
+            if dict != {}:
+                for key in dict:
+                    if info not in key:
+                        errors.append(("no information for '{}'".format(info)))
+            else:
+                errors.append(("no information for '{}'".format(info)))
+
+        errors = list(dict.fromkeys(errors))
+        for error in errors:
+            print("ERROR: {}".format(error))
+
     else:
         for section in config_sections:
             for option in config_object.options(section):
@@ -40,7 +54,7 @@ def _get_data(request_info='all'):
             dict[section] = tmp_dict
             tmp_dict = {}
 
-    return dict
+    return dict, errors != []
 
 class Worker():
     def __init__(
@@ -88,9 +102,13 @@ class Worker():
             f = open("tempdata.ini", "w")
             _ffprobe(self.input_file, pformat='ini', pstdout=f)
             f.close()
-            return_data = _get_data(re.split("; |, |[\\s,]+|\n", self.request_data))
+            return_data, error_status = _get_data(re.split("; |, |[\\s,]+|\n", self.request_data))
+
             for section in return_data:
                 print("{:<20} :".format(section), return_data[section])
+
+            if error_status:
+                print("Run 'infomedia {}' to show all available information.".format(self.input_file))
 
 def mediainfo(file_path):
     f = open("tempdata.ini", "w")
@@ -99,4 +117,4 @@ def mediainfo(file_path):
     finally:
         f.close()
 
-    return _get_data()
+    return _get_data()[0]
