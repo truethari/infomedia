@@ -2,6 +2,7 @@ from .config    import _which_ffprobe
 from .utils     import _check_file_exists
 
 import os
+import sys
 import re
 import subprocess
 import json
@@ -13,6 +14,8 @@ def _ffprobe(file_path, pformat='ini', pstdout=subprocess.PIPE, psubprocess='cal
         return subprocess.call([_which_ffprobe(), '-v', 'quiet', '-print_format', pformat, '-show_format', '-show_streams', file_path], stdout=pstdout)
     elif psubprocess == 'Popen':
         return subprocess.Popen([_which_ffprobe(), '-v', 'quiet', '-print_format', pformat, '-show_format', '-show_streams', file_path], stdout=pstdout)
+    else:
+        raise AttributeError("module 'subprocess' has no attribute '{x}' or Infomedia is not supported '{x}'.".format(x=pstdout))
 
 def _get_data(request_info='all'):
     dict = {}
@@ -56,19 +59,18 @@ class Worker():
         if self.request_data == 'False' and self.output_format == 'False' and self.save_path == 'False':
             proc = _ffprobe(self.input_file, psubprocess='Popen')
             output = str(proc.stdout.read())
-            list1 = output.split("\\n")
-            for i in list1:
-                print(i)
+            for data in output.split("\\n"):
+                print(data)
 
         elif self.output_format != 'False' and self.save_path != 'False' and self.request_data == 'False':
             f = open(os.path.join(self.save_path, (ntpath.basename(self.input_file[:-3]) + self.output_format)), "w")
             _ffprobe(self.input_file, pformat=self.output_format, pstdout=f)
-            f.close
+            f.close()
 
         elif self.request_data != 'False':
             f = open("tempdata.ini", "w")
             _ffprobe(self.input_file, pformat='ini', pstdout=f)
-            f.close
+            f.close()
             return_data = _get_data(re.split("; |, |[\\s,]+|\n", self.request_data))
             for section in return_data:
                 print("{:<20} :".format(section), return_data[section])
@@ -76,7 +78,7 @@ class Worker():
 def mediainfo(file_path):
     f = open("tempdata.ini", "w")
     try:
-        _ffprobe(_check_file_exists(file_path), pformat='ini', pstdout=f)
+        _ffprobe(_check_file_exists(file_path), pstdout=f)
     finally:
         f.close()
 
