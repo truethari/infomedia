@@ -59,13 +59,30 @@ class Worker():
         if self.request_data == 'False' and self.output_format == 'False' and self.save_path == 'False':
             proc = _ffprobe(self.input_file, psubprocess='Popen')
             output = str(proc.stdout.read())
-            for data in output.split("\\n"):
-                print(data)
+            print("{dec}\ninfomedia information <-- {}\n{dec}\n".format(self.input_file, dec="="*(len(self.input_file)+26)))
+            for data in output.split("\\n")[2:-1]:
+                print(data.replace("=", " = "))
 
         elif self.output_format != 'False' and self.save_path != 'False' and self.request_data == 'False':
-            f = open(os.path.join(self.save_path, (ntpath.basename(self.input_file[:-3]) + self.output_format)), "w")
+            data_file = os.path.join(self.save_path, (ntpath.basename(self.input_file[:-3]) + self.output_format))
+            f = open(data_file, "w+")
             _ffprobe(self.input_file, pformat=self.output_format, pstdout=f)
+
+            if self.output_format == 'ini':
+                f.seek(0)
+                lines = f.readlines()
+                f = open(data_file, "w")
+                for line in lines[2:]:
+                    f.write(line)
+
             f.close()
+
+            if len(data_file) < len(self.input_file):
+                dec = "="*(len(self.input_file) + 26)
+            elif len(data_file) > len(self.input_file):
+                dec = "="*(len(data_file) + 26)
+
+            print("{dec}\ninfomedia information <-- {}\n{:<26}{}\n{dec}".format(self.input_file, "saved in: ", data_file, dec=dec))
 
         elif self.request_data != 'False':
             f = open("tempdata.ini", "w")
