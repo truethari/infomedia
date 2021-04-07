@@ -12,6 +12,9 @@ def main():
         formatter_class=MyHelpFormatter,
         description="infomedia {}".format(__version__)
     )
+
+    parser.print_usage = parser.print_help
+
     parser.add_argument("file", help="path to file")
 
     parser.add_argument(
