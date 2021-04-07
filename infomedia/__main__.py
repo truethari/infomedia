@@ -27,7 +27,7 @@ def main():
         "--save-path",
         type=str,
         default="False",
-        help="A file path to save the data file",
+        help="a file path to save the data file",
     )
 
     parser.add_argument(
@@ -35,8 +35,8 @@ def main():
         "--output-format",
         type=str,
         default="False",
-        choices=["json", "ini"],
-        help="Data file format",
+        choices=["json", "ini", "xml", "csv", "flat"],
+        help="data file format",
     )
 
     parser.add_argument(
