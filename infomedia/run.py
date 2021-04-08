@@ -75,7 +75,7 @@ class Worker():
             output = str(proc.stdout.read())
             print("{dec}\ninfomedia information <-- {}\n{dec}\n".format(self.input_file, dec="="*(len(self.input_file)+26)))
             for data in output.split("\\n")[2:-1]:
-                print(data.replace("=", " = "))
+                print(data.replace("=", " = ").replace("\\r", "").replace("\\", ""))
 
         elif self.output_format != 'False' and self.save_path != 'False' and self.request_data == 'False':
             data_file = os.path.join(self.save_path, (ntpath.basename(self.input_file[:-3]) + self.output_format))
