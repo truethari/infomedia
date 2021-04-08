@@ -30,7 +30,7 @@ def main():
         "--save-path",
         type=str,
         default="False",
-        help="a file path to save the data file",
+        help="a folder path to save the data file",
     )
 
     parser.add_argument(
