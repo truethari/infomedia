@@ -2,10 +2,8 @@ from .config    import _which_ffprobe
 from .utils     import _check_file_exists
 
 import os
-import sys
 import re
 import subprocess
-import json
 import ntpath
 import configparser
 
@@ -91,7 +89,7 @@ class Worker():
 
             f.close()
 
-            if len(data_file) < len(self.input_file):
+            if len(data_file) <= len(self.input_file):
                 dec = "="*(len(self.input_file) + 26)
             elif len(data_file) > len(self.input_file):
                 dec = "="*(len(data_file) + 26)
