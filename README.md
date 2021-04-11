@@ -51,6 +51,16 @@ optional arguments:
 
 ### Python
 
+Shell
+
+``` console
+>>> from infomedia import mediainfo
+>>> data = mediainfo("video.mkv")
+>>> data
+
+{'streams.stream.0': {'index': 0, 'codec_name': 'h264', 'codec_long_name': 'H.264 / AVC / MPEG-4 AVC / MPEG-4 part 10', 'profile': 'High', 'codec_type': 'video', 'codec_time_base': '1001/48000', 'codec_tag_string': '[0][0][0][0]', 'codec_tag': '0x0000', 'width': 1280, 'height': 720, 'coded_width': 1280, 'coded_height': 720, 'closed_captions': 0, 'has_b_frames': 2, 'sample_aspect_ratio': 'N/A', 'display_aspect_ratio': 'N/A', 'pix_fmt': 'yuv420p', 'level': 31, 'color_range': 'unknown', 'color_space': 'unknown', 'color_transfer': 'unknown', 'color_primaries': 'unknown', 'chroma_location': 'left', 'field_order': 'progressive', 'timecode': 'N/A', 'refs': 1, 'is_avc': 'true', 'nal_length_size': 4, 'id': 'N/A', 'r_frame_rate': '24000/1001', 'avg_frame_rate': '24000/1001', 'time_base': '1/1000', 'start_pts': 0, 'start_time': 0.0, 'duration_ts': 'N/A', 'duration': 'N/A', 'bit_rate': 'N/A', 'max_bit_rate': 'N/A', 'bits_per_raw_sample': 8, 'nb_frames': 'N/A', 'nb_read_frames': 'N/A', 'nb_read_packets': 'N/A'}, 'streams.stream.0.disposition': {'default': 1, 'dub': 0, 'original': 0, 'comment': 0, 'lyrics': 0, 'karaoke': 0, 'forced': 0, 'hearing_impaired': 0, 'visual_impaired': 0, 'clean_effects': 0, 'attached_pic': 0, 'timed_thumbnails': 0}, 'streams.stream.0.tags': {'handler_name': 'L-SMASH Video Handler', 'encoder': 'Lavc57.107.100 libx264', 'duration': '00\\:00\\:28.237000000'}, 'format': {'filename': '/home/user/videos/video.mkv', 'nb_streams': 1, 'nb_programs': 0, 'format_name': 'matroska,webm', 'format_long_name': 'Matroska / WebM', 'start_time': 0.0, 'duration': 28.237, 'size': 17433130, 'bit_rate': 4939088, 'probe_score': 100}, 'format.tags': {'compatible_brands': 'mp42mp41isomavc1', 'major_brand': 'mp42', 'minor_version': '0', 'encoder': 'Lavf57.83.100'}}
+```
+
 Example 1
 
 ``` python
@@ -77,6 +87,7 @@ for video in os.listdir(folder):
           "Codec type (video): {}"
           "Codec type (audio): {}"
           .format(
+              os.path.join(folder, video),
               data['format']['duration'],
               data['streams.stream.0']['codec_type'],
               data['streams.stream.1']['codec_type'],
