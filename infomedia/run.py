@@ -1,5 +1,5 @@
 from .config    import _which_ffprobe
-from .utils     import _check_file_exists
+from .utils     import _check_file_exists, _real_type
 
 import os
 import re
@@ -115,4 +115,16 @@ def mediainfo(file_path):
     finally:
         f.close()
 
-    return _get_data()[0]
+    media_data = _get_data()[0]
+
+    for main_key in media_data:
+        for key in media_data[main_key]:
+            if key in ('codec_tag', 'title', 'minor_version'):
+                continue
+
+            try:
+                media_data[main_key][key] = _real_type(media_data[main_key][key])
+            except SyntaxError:
+                continue
+
+    return media_data
