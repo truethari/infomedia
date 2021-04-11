@@ -1,5 +1,6 @@
 import os
 import sys
+import ast
 import zipfile
 
 import infomedia as _
@@ -35,3 +36,10 @@ def _check_file_exists(file_path):
             raise FileNotFoundError("infomedia --> {}: No such a file!".format(file_path))
 
     return real_path
+
+def _real_type(val):
+    try:
+        val = ast.literal_eval(val)
+    except ValueError:
+        pass
+    return val
