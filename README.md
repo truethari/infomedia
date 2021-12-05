@@ -2,12 +2,19 @@
 
 [![infomedia](https://github.com/truethari/infomedia/actions/workflows/infomedia.yml/badge.svg?branch=master)](https://github.com/truethari/infomedia/actions/workflows/infomedia.yml)
 [![made-with-python](https://img.shields.io/badge/Made%20with-Python-1f425f.svg)](https://www.python.org/)
+[![Codacy Badge](https://app.codacy.com/project/badge/Grade/972b3e817f6e47c2b161c5ad34d61f50)](https://www.codacy.com/gh/truethari/infomedia/dashboard?utm_source=github.com&utm_medium=referral&utm_content=truethari/infomedia&utm_campaign=Badge_Grade)
 [![PyPI version](https://badge.fury.io/py/infomedia.svg)](https://badge.fury.io/py/infomedia)
-[![Codacy Badge](https://app.codacy.com/project/badge/Grade/972b3e817f6e47c2b161c5ad34d61f50)](https://www.codacy.com/gh/truethari/infomedia/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=truethari/infomedia&amp;utm_campaign=Badge_Grade)
+[![Downloads](https://pepy.tech/badge/infomedia)](https://pepy.tech/project/infomedia)
 
 ## What is This
 
 This is a Python application that can be used to retrieve media file information such as duration, frame rate, bit rate, etc..
+
+## Important
+
+The base "FFmpeg - ffprobe" is used for the functionality of this package and the information of the videos is obtained from their tool.
+
+https://github.com/FFmpeg/FFmpeg
 
 ## Installation
 
@@ -21,7 +28,7 @@ You can use pip:
 
 ### Usage options
 
-``` text
+```text
 positional arguments:
     input                   path to file
 
@@ -37,7 +44,7 @@ optional arguments:
 
 ### Console
 
-``` console
+```console
 ~$ infomedia video.mkv
 ~$ infomedia c:/song.mp3
 
@@ -53,7 +60,7 @@ optional arguments:
 
 Shell
 
-``` console
+```console
 >>> from infomedia import mediainfo
 >>> data = mediainfo("video.mkv")
 >>> data
@@ -63,7 +70,7 @@ Shell
 
 Example 1
 
-``` python
+```python
 from infomedia import mediainfo
 
 data = mediainfo("video.mkv")
@@ -74,7 +81,7 @@ Example 2
 
 Notice: The 'streams.stream.1' is guessed as the audio data. This may change if other audio is embedded or something else. If you want to avoid such errors, check 'codec_type' before using / assign data.
 
-``` python
+```python
 from infomedia import mediainfo
 import os
 
@@ -99,146 +106,146 @@ for video in os.listdir(folder):
 
 ### json
 
-``` console
+```console
 ~$ infomedia c:/video.mp4 -of json -s d:/folder
 ```
 
 video.json
 
-``` json
+```json
 {
-    "streams": [
-        {
-            "index": 0,
-            "codec_name": "h264",
-            "codec_long_name": "H.264 / AVC / MPEG-4 AVC / MPEG-4 part 10",
-            "profile": "Main",
-            "codec_type": "video",
-            "codec_time_base": "125/5994",
-            "codec_tag_string": "avc1",
-            "codec_tag": "0x31637661",
-            "width": 1280,
-            "height": 720,
-            "coded_width": 1280,
-            "coded_height": 720,
-            "closed_captions": 0,
-            "has_b_frames": 2,
-            "sample_aspect_ratio": "1:1",
-            "display_aspect_ratio": "16:9",
-            "pix_fmt": "yuv420p",
-            "level": 31,
-            "color_range": "tv",
-            "color_space": "bt709",
-            "color_transfer": "bt709",
-            "color_primaries": "bt709",
-            "chroma_location": "left",
-            "refs": 1,
-            "is_avc": "true",
-            "nal_length_size": "4",
-            "r_frame_rate": "2997/125",
-            "avg_frame_rate": "2997/125",
-            "time_base": "1/11988",
-            "start_pts": 0,
-            "start_time": "0.000000",
-            "duration_ts": 2771000,
-            "duration": "231.147814",
-            "bit_rate": "1145112",
-            "bits_per_raw_sample": "8",
-            "nb_frames": "5542",
-            "disposition": {
-                "default": 1,
-                "dub": 0,
-                "original": 0,
-                "comment": 0,
-                "lyrics": 0,
-                "karaoke": 0,
-                "forced": 0,
-                "hearing_impaired": 0,
-                "visual_impaired": 0,
-                "clean_effects": 0,
-                "attached_pic": 0,
-                "timed_thumbnails": 0
-            },
-            "tags": {
-                "language": "und",
-                "handler_name": "VideoHandler"
-            }
-        },
-        {
-            "index": 1,
-            "codec_name": "aac",
-            "codec_long_name": "AAC (Advanced Audio Coding)",
-            "profile": "HE-AAC",
-            "codec_type": "audio",
-            "codec_time_base": "1/44100",
-            "codec_tag_string": "mp4a",
-            "codec_tag": "0x6134706d",
-            "sample_fmt": "fltp",
-            "sample_rate": "44100",
-            "channels": 2,
-            "channel_layout": "stereo",
-            "bits_per_sample": 0,
-            "r_frame_rate": "0/0",
-            "avg_frame_rate": "0/0",
-            "time_base": "1/44100",
-            "start_pts": 0,
-            "start_time": "0.000000",
-            "duration_ts": 10204036,
-            "duration": "231.384036",
-            "bit_rate": "47976",
-            "max_bit_rate": "603000",
-            "nb_frames": "4980",
-            "disposition": {
-                "default": 1,
-                "dub": 0,
-                "original": 0,
-                "comment": 0,
-                "lyrics": 0,
-                "karaoke": 0,
-                "forced": 0,
-                "hearing_impaired": 0,
-                "visual_impaired": 0,
-                "clean_effects": 0,
-                "attached_pic": 0,
-                "timed_thumbnails": 0
-            },
-            "tags": {
-                "language": "und",
-                "handler_name": "SoundHandler"
-            }
-        }
-    ],
-    "format": {
-        "filename": "c:/video.mp4",
-        "nb_streams": 2,
-        "nb_programs": 0,
-        "format_name": "mov,mp4,m4a,3gp,3g2,mj2",
-        "format_long_name": "QuickTime / MOV",
-        "start_time": "0.000000",
-        "duration": "231.385000",
-        "size": "34608911",
-        "bit_rate": "1196582",
-        "probe_score": 100,
-        "tags": {
-            "major_brand": "isom",
-            "minor_version": "512",
-            "compatible_brands": "isomiso2avc1mp41",
-            "title": "2000172463643763",
-            "encoder": "Lavf56.40.101"
-        }
+  "streams": [
+    {
+      "index": 0,
+      "codec_name": "h264",
+      "codec_long_name": "H.264 / AVC / MPEG-4 AVC / MPEG-4 part 10",
+      "profile": "Main",
+      "codec_type": "video",
+      "codec_time_base": "125/5994",
+      "codec_tag_string": "avc1",
+      "codec_tag": "0x31637661",
+      "width": 1280,
+      "height": 720,
+      "coded_width": 1280,
+      "coded_height": 720,
+      "closed_captions": 0,
+      "has_b_frames": 2,
+      "sample_aspect_ratio": "1:1",
+      "display_aspect_ratio": "16:9",
+      "pix_fmt": "yuv420p",
+      "level": 31,
+      "color_range": "tv",
+      "color_space": "bt709",
+      "color_transfer": "bt709",
+      "color_primaries": "bt709",
+      "chroma_location": "left",
+      "refs": 1,
+      "is_avc": "true",
+      "nal_length_size": "4",
+      "r_frame_rate": "2997/125",
+      "avg_frame_rate": "2997/125",
+      "time_base": "1/11988",
+      "start_pts": 0,
+      "start_time": "0.000000",
+      "duration_ts": 2771000,
+      "duration": "231.147814",
+      "bit_rate": "1145112",
+      "bits_per_raw_sample": "8",
+      "nb_frames": "5542",
+      "disposition": {
+        "default": 1,
+        "dub": 0,
+        "original": 0,
+        "comment": 0,
+        "lyrics": 0,
+        "karaoke": 0,
+        "forced": 0,
+        "hearing_impaired": 0,
+        "visual_impaired": 0,
+        "clean_effects": 0,
+        "attached_pic": 0,
+        "timed_thumbnails": 0
+      },
+      "tags": {
+        "language": "und",
+        "handler_name": "VideoHandler"
+      }
+    },
+    {
+      "index": 1,
+      "codec_name": "aac",
+      "codec_long_name": "AAC (Advanced Audio Coding)",
+      "profile": "HE-AAC",
+      "codec_type": "audio",
+      "codec_time_base": "1/44100",
+      "codec_tag_string": "mp4a",
+      "codec_tag": "0x6134706d",
+      "sample_fmt": "fltp",
+      "sample_rate": "44100",
+      "channels": 2,
+      "channel_layout": "stereo",
+      "bits_per_sample": 0,
+      "r_frame_rate": "0/0",
+      "avg_frame_rate": "0/0",
+      "time_base": "1/44100",
+      "start_pts": 0,
+      "start_time": "0.000000",
+      "duration_ts": 10204036,
+      "duration": "231.384036",
+      "bit_rate": "47976",
+      "max_bit_rate": "603000",
+      "nb_frames": "4980",
+      "disposition": {
+        "default": 1,
+        "dub": 0,
+        "original": 0,
+        "comment": 0,
+        "lyrics": 0,
+        "karaoke": 0,
+        "forced": 0,
+        "hearing_impaired": 0,
+        "visual_impaired": 0,
+        "clean_effects": 0,
+        "attached_pic": 0,
+        "timed_thumbnails": 0
+      },
+      "tags": {
+        "language": "und",
+        "handler_name": "SoundHandler"
+      }
     }
+  ],
+  "format": {
+    "filename": "c:/video.mp4",
+    "nb_streams": 2,
+    "nb_programs": 0,
+    "format_name": "mov,mp4,m4a,3gp,3g2,mj2",
+    "format_long_name": "QuickTime / MOV",
+    "start_time": "0.000000",
+    "duration": "231.385000",
+    "size": "34608911",
+    "bit_rate": "1196582",
+    "probe_score": 100,
+    "tags": {
+      "major_brand": "isom",
+      "minor_version": "512",
+      "compatible_brands": "isomiso2avc1mp41",
+      "title": "2000172463643763",
+      "encoder": "Lavf56.40.101"
+    }
+  }
 }
 ```
 
 ### ini
 
-``` console
+```console
 ~$ infomedia c:/video.mp4 -of ini -s d:/folder
 ```
 
 video.ini
 
-``` ini
+```ini
 [streams.stream.0]
 index=0
 codec_name=h264
@@ -370,13 +377,13 @@ encoder=Lavf56.40.101
 
 ### xml
 
-``` console
+```console
 ~$ infomedia c:/video.mp4 -of xml -s d:/folder
 ```
 
 video.xml
 
-``` xml
+```xml
 <streams>
     <stream index="0" codec_name="h264" codec_long_name="H.264 / AVC / MPEG-4 AVC / MPEG-4 part 10" profile="Main" codec_type="video" codec_time_base="125/5994" codec_tag_string="avc1" codec_tag="0x31637661" width="1280" height="720" coded_width="1280" coded_height="720" closed_captions="0" has_b_frames="2" sample_aspect_ratio="1:1" display_aspect_ratio="16:9" pix_fmt="yuv420p" level="31" color_range="tv" color_space="bt709" color_transfer="bt709" color_primaries="bt709" chroma_location="left" refs="1" is_avc="true" nal_length_size="4" r_frame_rate="2997/125" avg_frame_rate="2997/125" time_base="1/11988" start_pts="0" start_time="0.000000" duration_ts="2771000" duration="231.147814" bit_rate="1145112" bits_per_raw_sample="8" nb_frames="5542">
         <disposition default="1" dub="0" original="0" comment="0" lyrics="0" karaoke="0" forced="0" hearing_impaired="0" visual_impaired="0" clean_effects="0" attached_pic="0" timed_thumbnails="0"/>
@@ -401,27 +408,27 @@ video.xml
 
 ### csv
 
-``` console
+```console
 ~$ infomedia c:/video.mp4 -of csv -s d:/folder
 ```
 
 video.csv
 
 | A      | B            | C    | D                                         | E                       | FGH |
-|--------|--------------|------|-------------------------------------------|-------------------------|-----|
+| ------ | ------------ | ---- | ----------------------------------------- | ----------------------- | --- |
 | stream | 0            | h264 | H.264 / AVC / MPEG-4 AVC / MPEG-4 part 10 | Main                    | ~~~ |
 | stream | 1            | aac  | AAC (Advanced Audio Coding)               | HE-AAC                  | ~~~ |
 | Format | c:/video.mp4 | 2    | 0                                         | mov,mp4,m4a,3gp,3g2,mj2 | ~~~ |
 
 ### flat
 
-``` console
+```console
 ~$ infomedia c:/video.mp4 -of flat -s d:/folder
 ```
 
 video.flat
 
-``` flat
+```flat
 streams.stream.0.index=0
 streams.stream.0.codec_name="h264"
 streams.stream.0.codec_long_name="H.264 / AVC / MPEG-4 AVC / MPEG-4 part 10"
